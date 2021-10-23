@@ -45,5 +45,5 @@ root                    (project root folder)
 Billy Estella: bestella@byui.edu  
 Santiago Pintus: pin21010@byui.edu  
 Aaron Quarshie: ronyquash@gmail.com  
-Ricardo Chamorro: rikmanu1999@gmail.com 
-Zitlally Almazan: alm20004@byui.edu 
+Ricardo Chamorro: rikmanu1999@gmail.com  
+Zitlally Almazan: alm20004@byui.edu  
