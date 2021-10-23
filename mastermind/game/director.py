@@ -17,6 +17,7 @@ class Director:
         guess (Guess): Current player's guess to be compared and stored.
         roster (Roster): An instance of the class of objects known as Roster.
         keep_playing (boolean): Whether or not the game can continue.
+        code_length (int): The amount of digits of the code
         turn_count (int): (Optional) checks turn count, could be of use if adding more players
         winner (string): Gets the winner's name
     """
@@ -32,6 +33,7 @@ class Director:
         self._guess = Guess()
         self._roster = Roster()
         self._keep_playing = True
+        self._code_length = 4
         self._winner = ''
         self._turn_count = 0
         
@@ -54,9 +56,20 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        green = '\033[92m'
+        blue = '\033[94m'
+        end_color = '\033[0m'
+        current_color = green
+
         for n in range(2):
+            #Setting the color of each player
+            if current_color == green:
+                current_color = blue
+            else:
+                current_color = green
+
             name = self._console.read(f"Enter a name for player {n + 1}: ")
-            player = Player(name)
+            player = Player(f'{current_color}{name}{end_color}')
             self._roster.add_player(player)
             self._board.prepare()
 
@@ -77,7 +90,7 @@ class Director:
         # get current player's guess
         player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn:")
-        guess = self._console.read("What is your guess? ")
+        guess = self._console.ask_guess(self._code_length)
         self._guess.set_guess(guess)
 
     def _do_updates(self):

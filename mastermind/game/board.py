@@ -26,7 +26,7 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-        code = str(random.randint(1000, 10000))
+        code = str(random.randint(1000, 9999))
         guess = "----"
         hint = "****"
         self._player_items.append([code, guess, hint])
@@ -85,13 +85,24 @@ class Board:
         Returns: 
             string: The board in string format.
         """ 
+        green = '\033[92m'
+        blue = '\033[94m'
+        end_color = '\033[0m'
+        current_color = green
+
         board_string = '\n--------------------' 
         players = roster.get_roster()
         for player in players:
             index = players.index(player)
             guess = self._player_items[index][1]
             hint = self._player_items[index][2]
-            board_string += (f"\nPlayer {player.get_name()}: {guess}, {hint}")  
+
+            if current_color == green:
+                current_color = blue
+            else:
+                current_color = green
+
+            board_string += (f"\n{current_color}Player {player.get_name()}: {guess}, {hint}{end_color}")  
         board_string += '\n--------------------\n'
         return board_string
         
